@@ -156,9 +156,9 @@ afn validatePasswordInterface @ 0x100001f60
 [0x100001f60]> 
 ```
 
-Compare decompiled output with [source](../PasswordCheck.app.src/PasswordCheck/ContentView.swift)
+Compare decompiled output with [source](../PasswordCheck.src/PasswordCheck/ContentView.swift)
 
-```
+```swift
 [0x100001f60]> decai -e lang=swiftui
 [0x100001f60]> decai -d
 import SwiftUI
