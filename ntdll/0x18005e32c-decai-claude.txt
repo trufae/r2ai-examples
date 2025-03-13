@@ -1,0 +1,29 @@
+void EtwpAddProviderTrackingInfo(int64_t arg1, int64_t arg2, int64_t arg3) {
+    int64_t providerTrackingInfo = arg1 + 0x1d0;
+    int64_t binaryInfo = arg1 + 0x1c0;
+    int64_t providerInfo = arg2;
+    int32_t trackingType = (int32_t)arg3;
+
+    if (*(int64_t*)providerTrackingInfo - providerTrackingInfo) {
+        if (*(int32_t*)(providerInfo + 0x30) < trackingType) {
+            if (*(int64_t*)binaryInfo - binaryInfo) {
+                EtwpAddDebugInfoEvents();
+            }
+
+            if (*(int64_t*)providerTrackingInfo - providerTrackingInfo) {
+                EtwpAddBinaryInfoEvents(arg1, providerInfo, trackingType, 0);
+            }
+        }
+    } else if (*(int64_t*)binaryInfo - binaryInfo) {
+  1 void pdb_EtwpAddProviderTrackingInfo(int64_t arg1, int64_t arg2, int64_t arg3) {
+        if (*(int32_t*)(providerInfo + 0x30) < trackingType) {
+            if (*(int64_t*)binaryInfo - binaryInfo) {
+                EtwpAddDebugInfoEvents();
+            }
+
+            if (*(int64_t*)providerTrackingInfo - providerTrackingInfo) {
+                EtwpAddBinaryInfoEvents(arg1, providerInfo, trackingType, 0);
+            }
+        }
+    }
+}

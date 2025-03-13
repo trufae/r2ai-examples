@@ -1,0 +1,63 @@
+```c
+#include <stdint.h>
+#include <string.h>
+
+void EtwpAddDebugInfoEvents(int64_t arg1, int64_t arg2, int64_t arg3) {
+    int64_t buildLabEx = 0x18015b2e0; // u"BuildLabEx"
+    int64_t registryPath = 0x18015b260; // u"\Registry\Machine\SOFTWARE\Microsoft\Windows NT\CurrentVersion"
+    int32_t bufferSize = 260;
+    int32_t offset = arg3 - *(int32_t*)(arg2 + 0x30);
+    int64_t r14 = arg2 + 0x58;
+    int64_t rsi = arg1;
+    int64_t rcx = arg2;
+    int32_t edx = 0x42;
+    int64_t r9 = arg2 + 0x160;
+    int64_t r8 = r9;
+    int64_t var_50h = 0;
+    int64_t var_40h = 0;
+    int64_t var_30h = 0;
+    int32_t var_28h = 0;
+    int32_t var_20h_2 = 0;
+
+    if (EtwpQueryRegString(1, 0, buildLabEx, registryPath) < 0) {
+        r14 = arg2 + 0x58;
+    }
+
+    rsi += 0x1c0;
+    int64_t rbx = *(int64_t*)rsi;
+
+    if (EtwpQueryRegString(1, 0, buildLabEx, registryPath) >= 0) {
+        var_20h_2 = 0x208;
+        r8 = 0;
+        rcx = var_50h;
+        edx = bufferSize;
+        if (RtlUnicodeToMultiByteN(var_50h, bufferSize, 0, buildLabEx) < 0) {
+            r14 = arg2 + 0x58;
+        }
+    }
+
+    int64_t rax = 0;
+    while (1) {
+        rax++;
+        if (*(char*)(var_50h + rax) == 0) break;
+    }
+
+    var_30h = var_40h;
+    r9 = var_50h;
+    var_28h = offset;
+    rcx = arg2;
+    var_20h_2 = *(int32_t*)var_40h - 4;
+    edx = 0x40;
+    r8 = r14;
+    if (EtwpAddEventToBuffer(0, 0, edx, 0x178000) < 0) {
+        return;
+    }
+
+    *(int32_t*)var_40h += 7;
+    *(int32_t*)var_40h &= 0xfffffff8;
+    offset -= *(int32_t*)var_40h;
+
+    rsi += 0x1c0;
+    rbx = *(int64_t*)rsi;
+}
+```

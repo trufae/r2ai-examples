@@ -1,0 +1,19 @@
+void pdb_EtwpAddProviderTrackingInfo(int64_t arg1, int64_t arg2, int64_t arg3) {
+    int64_t* rdi = (int64_t*)(arg1 + 0x1d0);
+    int32_t esi = (int32_t)arg3;
+    int64_t* rax = (int64_t*)(arg1 + 0x1c0);
+    int64_t rbp = arg2;
+    int64_t rbx = arg1;
+
+    int64_t v = *rdi - (int64_t)rdi;
+    if (v) {
+        v = *(int32_t*)(rbp + 0x30) - esi;
+        if (v >= 0) {
+            pdb_EtwpAddDebugInfoEvents();
+            v = *rax - (int64_t)rax;
+            if (v) {
+                pdb_EtwpAddBinaryInfoEvents(rbx, rbp, 0x178000, 0);
+            }
+        }
+    }
+}

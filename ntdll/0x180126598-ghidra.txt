@@ -1,0 +1,49 @@
+
+void EtwpAddDebugInfoEvents(longlong param_1,longlong param_2,int param_3)
+ 
+{
+  char *pcVar1;
+  NTSTATUS status;
+  NTSTATUS err;
+  longlong lVar2;
+  undefined8 uVar4;
+  undefined8 *puVar5;
+  uint Size;
+  undefined1 auStackY_398 [32];
+  uint local_358 [4];
+  CHAR local_348;
+  char acStack_347 [271];
+  uint *local_238 [66];
+  ulonglong stack_cookie;
+  longlong lVar3;
+  
+  stack_cookie = __security_cookie ^ (ulonglong)auStackY_398;
+  Size = param_3 - *(int *)(param_2 + 0x30);
+  status = EtwpQueryRegString(L"\\Registry\\Machine\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
+                              L"BuildLabEx",local_238,0x104);
+  if ((-1 < status) && (err = RtlUnicodeToMultiByteN(&local_348,0x104,NULL,(PCWCH)local_238,0x208), -1 < err))
+  {
+    lVar3 = -1;
+    do {
+      lVar2 = lVar3 + 1;
+      pcVar1 = acStack_347 + lVar3;
+      lVar3 = lVar2;
+    } while (*pcVar1 != FALSE);
+    uVar4 = EtwpAddEventToBuffer
+                      (param_2,0x42,(undefined8 *)(param_2 + 0x58),(uint)&local_348,(int)lVar2 + 1,Size,
+                       local_358);
+    if ((int)uVar4 < 0) {
+      return;
+    }
+    Size = Size - (local_358[0] + 7 & 0xfffffff8);
+  }
+  puVar5 = *(undefined8 **)(param_1 + 0x1c0);
+  while ((puVar5 != (undefined8 *)(param_1 + 0x1c0) &&
+         (uVar4 = EtwpAddEventToBuffer
+                            (param_2,0x40,(undefined8 *)(param_2 + 0x58),(int)puVar5 + 0x1c,
+                             *(int *)((longlong)puVar5 + 0x14) - 4,Size,local_358), -1 < (int)uVar4))) {
+    puVar5 = (undefined8 *)*puVar5;
+    Size = Size - (local_358[0] + 7 & 0xfffffff8);
+  }
+  return;
+}
